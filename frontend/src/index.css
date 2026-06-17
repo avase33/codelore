@@ -1,0 +1,118 @@
+@tailwind base;
+@tailwind components;
+@tailwind utilities;
+
+@layer base {
+  * {
+    box-sizing: border-box;
+    margin: 0;
+    padding: 0;
+  }
+
+  html {
+    -webkit-font-smoothing: antialiased;
+    -moz-osx-font-smoothing: grayscale;
+  }
+
+  body {
+    background-color: #0a0a0f;
+    color: #f1f5f9;
+    font-family: 'Inter', system-ui, sans-serif;
+  }
+
+  ::-webkit-scrollbar {
+    width: 6px;
+    height: 6px;
+  }
+  ::-webkit-scrollbar-track {
+    background: #111117;
+  }
+  ::-webkit-scrollbar-thumb {
+    background: #3a3a55;
+    border-radius: 3px;
+  }
+  ::-webkit-scrollbar-thumb:hover {
+    background: #7c3aed;
+  }
+}
+
+@layer components {
+  .btn-primary {
+    @apply inline-flex items-center gap-2 px-4 py-2 bg-violet-600 hover:bg-violet-500
+      text-white text-sm font-medium rounded-lg transition-colors duration-150
+      focus:outline-none focus:ring-2 focus:ring-violet-500 focus:ring-offset-2
+      focus:ring-offset-gray-900 disabled:opacity-50 disabled:cursor-not-allowed;
+  }
+
+  .btn-secondary {
+    @apply inline-flex items-center gap-2 px-4 py-2 bg-gray-800 hover:bg-gray-700
+      text-gray-200 text-sm font-medium rounded-lg border border-gray-700 transition-colors duration-150
+      focus:outline-none focus:ring-2 focus:ring-gray-500 disabled:opacity-50;
+  }
+
+  .card {
+    @apply bg-gray-900 border border-gray-800 rounded-xl p-5;
+  }
+
+  .input {
+    @apply w-full px-3 py-2 bg-gray-800 border border-gray-700 rounded-lg text-gray-100
+      placeholder-gray-500 text-sm focus:outline-none focus:ring-2 focus:ring-violet-500
+      focus:border-transparent transition-colors;
+  }
+
+  .badge {
+    @apply inline-flex items-center px-2.5 py-0.5 rounded-full text-xs font-medium;
+  }
+
+  .badge-violet {
+    @apply badge bg-violet-900/40 text-violet-300 border border-violet-800/50;
+  }
+
+  .badge-green {
+    @apply badge bg-emerald-900/40 text-emerald-300 border border-emerald-800/50;
+  }
+
+  .badge-yellow {
+    @apply badge bg-amber-900/40 text-amber-300 border border-amber-800/50;
+  }
+
+  .badge-red {
+    @apply badge bg-red-900/40 text-red-300 border border-red-800/50;
+  }
+
+  .badge-gray {
+    @apply badge bg-gray-800 text-gray-400 border border-gray-700;
+  }
+
+  /* Markdown rendered docs */
+  .prose-codelore {
+    @apply text-gray-300 leading-relaxed;
+  }
+  .prose-codelore h1 { @apply text-2xl font-bold text-white mt-8 mb-4 first:mt-0; }
+  .prose-codelore h2 { @apply text-xl font-semibold text-white mt-6 mb-3; }
+  .prose-codelore h3 { @apply text-lg font-medium text-gray-100 mt-5 mb-2; }
+  .prose-codelore p { @apply mb-4; }
+  .prose-codelore ul { @apply list-disc pl-5 mb-4 space-y-1; }
+  .prose-codelore ol { @apply list-decimal pl-5 mb-4 space-y-1; }
+  .prose-codelore li { @apply text-gray-300; }
+  .prose-codelore a { @apply text-violet-400 hover:text-violet-300 underline; }
+  .prose-codelore strong { @apply text-white font-semibold; }
+  .prose-codelore code {
+    @apply bg-gray-800 text-violet-300 rounded px-1.5 py-0.5 text-sm font-mono;
+  }
+  .prose-codelore pre {
+    @apply bg-gray-800 border border-gray-700 rounded-lg p-4 overflow-x-auto mb-4;
+  }
+  .prose-codelore pre code {
+    @apply bg-transparent text-gray-200 p-0;
+  }
+  .prose-codelore blockquote {
+    @apply border-l-4 border-violet-600 pl-4 italic text-gray-400 my-4;
+  }
+  .prose-codelore table { @apply w-full border-collapse mb-4; }
+  .prose-codelore th {
+    @apply bg-gray-800 text-gray-200 font-semibold px-3 py-2 text-left border border-gray-700;
+  }
+  .prose-codelore td { @apply px-3 py-2 border border-gray-800 text-gray-300; }
+  .prose-codelore hr { @apply border-gray-800 my-6; }
+}
