@@ -1,7 +1,7 @@
 # 🔮 CodeLore — Living Documentation AI Platform
 
 > Auto-generate always-up-to-date documentation from your GitHub repositories.
-> Architecture overviews, setup guides, API references, design decision logs — all powered by AI and kept fresh with every commit.
+> Architecture overviews, setup guides, API references, design decision logs all powered by AI and kept fresh with every commit.
 
 ![Node.js](https://img.shields.io/badge/Node.js-20-green)
 ![Express](https://img.shields.io/badge/Express-4.18-lightgrey)
@@ -15,7 +15,7 @@
 
 Connect any GitHub repository and CodeLore will:
 
-1. **Analyze** your entire codebase — file structure, languages, dependencies
+1. **Analyze** your entire codebase file structure, languages, dependencies
 2. **Read** your git history to understand what changed and why
 3. **Generate** living documentation using AI:
    - 🏗️ Architecture Overview with Mermaid diagrams
@@ -23,7 +23,7 @@ Connect any GitHub repository and CodeLore will:
    - 📡 API Reference from your route files
    - 🧭 Design Decision Log ("why we chose X over Y")
    - 📖 Project Glossary of domain-specific terms
-4. **Keep it fresh** — re-generate on every push (optional)
+4. **Keep it fresh**  re-generate on every push (optional)
 5. **Share** publicly or keep private
 
 ---
