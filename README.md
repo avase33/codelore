@@ -1,188 +1,209 @@
-# 🔮 CodeLore — Living Documentation AI Platform
-
-> Auto-generate always-up-to-date documentation from your GitHub repositories.
-> Architecture overviews, setup guides, API references, design decision logs all powered by AI and kept fresh with every commit.
-
-![Node.js](https://img.shields.io/badge/Node.js-20-green)
-![Express](https://img.shields.io/badge/Express-4.18-lightgrey)
-![React](https://img.shields.io/badge/React-18-61DAFB)
-![MongoDB](https://img.shields.io/badge/MongoDB-7-47A248)
-![License](https://img.shields.io/badge/License-MIT-violet)
-
----
-
-## ✨ What CodeLore Does
-
-Connect any GitHub repository and CodeLore will:
-
-1. **Analyze** your entire codebase file structure, languages, dependencies
-2. **Read** your git history to understand what changed and why
-3. **Generate** living documentation using AI:
-   - 🏗️ Architecture Overview with Mermaid diagrams
-   - 🚀 Setup & Getting Started guide
-   - 📡 API Reference from your route files
-   - 🧭 Design Decision Log ("why we chose X over Y")
-   - 📖 Project Glossary of domain-specific terms
-4. **Keep it fresh**  re-generate on every push (optional)
-5. **Share** publicly or keep private
-
----
-
-## 🏗️ Architecture
+<div align="center">
 
 ```
-codelore/
-├── backend/                    # Node.js + Express API
-│   └── src/
-│       ├── config/             # DB, Redis, app config
-│       ├── models/             # Mongoose schemas (User, Repository, Documentation)
-│       ├── middleware/         # JWT auth, error handling
-│       ├── routes/             # /auth, /repos, /docs
-│       ├── services/
-│       │   ├── githubService.js   # Octokit — repo analysis, OAuth
-│       │   ├── aiService.js       # OpenAI — doc generation
-│       │   └── analysisService.js # Full analysis pipeline
-│       └── jobs/
-│           └── analysisQueue.js   # Bull queue for async analysis
-├── frontend/                   # React + Vite + Tailwind
-│   └── src/
-│       ├── pages/              # Dashboard, Repos, Docs, DocView, Explore
-│       ├── components/         # Layout, sidebar
-│       ├── store/              # Zustand auth store
-│       └── lib/api.ts          # Axios client with token refresh
-├── docker-compose.yml
-└── .github/workflows/ci.yml
+  ___          _      _                  
+ / __|___   __| |___ | |   ___  _ _ ___ 
+| (__/ _ \ / _` / -_)| |__/ _ \| '_/ -_)
+ \___\___/ \__,_\___||____\___/|_| \___|
+```
+
+### **Living Documentation for Engineering Teams**
+
+*Documentation that reads your code, not the other way around.*
+
+<br/>
+
+[![CI](https://github.com/avase33/codelore/actions/workflows/ci.yml/badge.svg)](https://github.com/avase33/codelore/actions/workflows/ci.yml)
+![Node.js](https://img.shields.io/badge/Node.js-20-339933?logo=node.js&logoColor=white)
+![JavaScript](https://img.shields.io/badge/JavaScript-ES2022-F7DF1E?logo=javascript&logoColor=black)
+![React](https://img.shields.io/badge/React-18-61DAFB?logo=react&logoColor=black)
+![License](https://img.shields.io/badge/License-Proprietary-red)
+
+<br/>
+
+> **CodeLore** is an AI-powered documentation platform that stays in sync with your codebase automatically. Connect a repo, and CodeLore parses your code, extracts architecture decisions, maps dependencies, and surfaces knowledge graphs that update with every commit.
+
+</div>
+
+---
+
+## The Problem
+
+Engineering teams waste thousands of hours writing docs that go stale within days of the commit that changes everything. New engineers spend weeks piecing together how the system works. Senior engineers become documentation bottlenecks.
+
+CodeLore inverts this: the code is the source of truth, and documentation is auto-generated from it.
+
+---
+
+## Feature Highlights
+
+### Automated Docs Generation
+
+- Parse any JavaScript, TypeScript, Python, or Java codebase
+- Extract API routes, data models, function signatures, and comments
+- Generate structured, human-readable documentation automatically
+- Detect architectural patterns: MVC, microservices, event-driven, etc.
+
+### Knowledge Graph
+
+- Visual map of how your modules, classes, and functions relate
+- Dependency graph: what imports what, what calls what
+- Click any node to jump to the generated docs for that component
+- Highlights circular dependencies and orphaned code
+
+### Sync on Every Push
+
+- GitHub webhook integration: re-analyzes on every push to main
+- Diffs documentation changes alongside code changes
+- Preserves manually written overrides across re-generations
+- Version history: see how your architecture evolved over time
+
+### Team Collaboration
+
+- Annotate generated docs with team context
+- Comment threads on any doc section
+- Assign ownership to modules and components
+- Search across all documentation with full-text index
+
+---
+
+## Architecture
+
+```
++--------------------------------------------------------------+
+|                      CLIENT (Browser)                        |
+|  React 18 - JavaScript - Tailwind CSS - Knowledge Graph UI  |
++------------------------+-------------------------------------+
+                         |
+                         |  REST API  +  WebSocket (live sync)
+                         |
++------------------------v-------------------------------------+
+|                    BACKEND (Node.js 20)                      |
+|  Express 4 - ES Modules                                      |
+|                                                              |
+|  +-----------+  +----------+  +----------+  +----------+   |
+|  |   Parser  |  |   Graph  |  |   Docs   |  |  Webhook |   |
+|  |  Service  |  |  Engine  |  | Generator|  | Listener |   |
+|  +-----------+  +----------+  +----------+  +----------+   |
++------------------------+-------------------------------------+
+                         |
++------------------------v-------------------------------------+
+|                      MongoDB 7                               |
+|  Repositories - ParsedModules - DocPages - Teams - Comments |
++--------------------------------------------------------------+
 ```
 
 ---
 
-## 🚀 Quick Start
+## Tech Stack
 
-### With Docker (recommended)
+| Layer | Technology | Purpose |
+|---|---|---|
+| **Runtime** | Node.js 20, ES Modules | Backend parsing engine |
+| **Framework** | Express 4 | REST API and webhooks |
+| **Database** | MongoDB 7, Mongoose | Document and graph storage |
+| **Parser** | AST-based code analysis | Language-aware code parsing |
+| **Frontend** | React 18, JavaScript | UI and knowledge graph |
+| **Styling** | Tailwind CSS | Clean, readable UI |
+| **Realtime** | WebSocket | Live doc sync on push |
+| **CI** | GitHub Actions | Build and test on push |
+
+---
+
+## Quick Start
+
+### Option A: Docker
 
 ```bash
 git clone https://github.com/avase33/codelore.git
 cd codelore
 cp .env.example .env
-# Edit .env — add GITHUB_CLIENT_ID, GITHUB_CLIENT_SECRET, OPENAI_API_KEY
 docker compose up -d
 ```
 
-- **API**: http://localhost:4000
-- **Frontend**: http://localhost:5173
+| Service | URL |
+|---|---|
+| App | http://localhost:3000 |
+| API | http://localhost:5000/api |
 
-### Local Development
+### Option B: Local Development
 
-**Backend:**
+**Backend**
+
 ```bash
 cd backend
 npm install
-cp ../.env.example .env   # configure required vars
-npm run dev               # nodemon auto-reload on port 4000
+cp ../.env.example .env
+npm run dev
 ```
 
-**Frontend:**
+**Frontend**
+
 ```bash
 cd frontend
 npm install
-npm run dev               # Vite dev server on port 5173
-```
-
-### GitHub OAuth Setup
-
-1. Go to https://github.com/settings/applications/new
-2. Set **Homepage URL**: `http://localhost:5173`
-3. Set **Callback URL**: `http://localhost:4000/api/v1/auth/github/callback`
-4. Copy Client ID and Secret into `.env`
-
----
-
-## 📡 API Reference
-
-### Authentication
-```http
-POST /api/v1/auth/register        # Email/password signup
-POST /api/v1/auth/login           # Login → JWT tokens
-POST /api/v1/auth/refresh         # Refresh access token
-GET  /api/v1/auth/github          # GitHub OAuth redirect
-GET  /api/v1/auth/github/callback # OAuth callback (redirects to frontend)
-GET  /api/v1/auth/me              # Current user
-PATCH /api/v1/auth/me             # Update profile
-```
-
-### Repositories
-```http
-GET    /api/v1/repos              # List connected repos
-GET    /api/v1/repos/github       # List user's GitHub repos
-POST   /api/v1/repos              # Connect repo (triggers analysis)
-GET    /api/v1/repos/:id          # Repo details + file tree
-POST   /api/v1/repos/:id/reanalyze # Re-trigger analysis
-PATCH  /api/v1/repos/:id          # Update settings
-DELETE /api/v1/repos/:id          # Disconnect repo
-```
-
-### Documentation
-```http
-GET    /api/v1/docs               # List user's docs
-GET    /api/v1/docs/public        # Browse public docs
-GET    /api/v1/docs/:id           # Get doc with all sections
-GET    /api/v1/docs/repo/:repoId  # Get doc for a repo
-PATCH  /api/v1/docs/:id           # Edit section / settings
-DELETE /api/v1/docs/:id           # Delete documentation
+npm run dev
 ```
 
 ---
 
-## 🛠️ Tech Stack
+## How It Works
 
-| Layer | Technology |
-|-------|-----------|
-| Backend | Node.js 20, Express 4, ES Modules |
-| Database | MongoDB 7 (Mongoose ODM) |
-| Queue | Bull + Redis 7 (async analysis jobs) |
-| Auth | JWT (jsonwebtoken) + bcrypt + GitHub OAuth |
-| AI | OpenAI GPT-4o-mini (doc generation) |
-| GitHub API | Octokit REST |
-| Frontend | React 18, TypeScript, Vite |
-| Styling | Tailwind CSS (dark theme, gray-950) |
-| State | Zustand + TanStack Query |
-| Markdown | react-markdown + remark-gfm |
-| Charts | Recharts |
-| CI/CD | GitHub Actions + Docker |
-
----
-
-## 🗺️ Roadmap
-
-- [ ] Webhook integration (auto-regenerate on push)
-- [ ] Diff viewer — show what changed in each re-generation
-- [ ] Team workspaces and collaboration
-- [ ] Custom doc templates
-- [ ] Slack/Discord notifications when docs regenerate
-- [ ] GitHub App installation (no OAuth required)
-- [ ] CLI: `npx codelore generate` for local repos
-- [ ] VS Code extension
-- [ ] Search across all doc content
-- [ ] Export to PDF / Notion / Confluence
+```
+Your Repo (GitHub)
+      |
+      | push event --> GitHub Webhook
+      |
+      v
+CodeLore Parser
+      |
+      | AST traversal of every changed file
+      | extracts: functions, classes, routes, imports, exports
+      |
+      v
+Knowledge Graph Builder
+      | links: caller --> callee, importer --> module
+      | detects: patterns, clusters, orphans
+      |
+      v
+Doc Generator
+      | produces: human-readable Markdown per module
+      | merges: manual annotations from previous runs
+      |
+      v
+MongoDB Storage  -->  React UI  -->  Your Team
+```
 
 ---
 
-## 🤝 Contributing
+## Roadmap
 
-1. Fork the repository
-2. `git checkout -b feature/your-feature`
-3. `git commit -m 'feat: add your feature'`
-4. `git push origin feature/your-feature`
-5. Open a Pull Request
-
----
-
-## 📄 License
-
-MIT License — Copyright (c) 2026 Akhil Vase
-
-See [LICENSE](LICENSE) for full text.
+- [ ] PitchSync integration -- generate pitch slides from docs
+- [ ] Slack bot: "What does UserService do?" answered in thread
+- [ ] Diff-aware doc updates (only re-gen changed modules)
+- [ ] Multi-language support: Go, Rust, C#
+- [ ] Notion and Confluence export
+- [ ] JIRA ticket auto-linking
+- [ ] AI-powered Q&A over your codebase
+- [ ] On-premise deployment for enterprise
 
 ---
 
-Built with ❤️ by [Akhil Vase](https://github.com/avase33)
+## License
+
+```
+Copyright (c) 2026 Akhil Vase. All rights reserved.
+
+This source code is the proprietary property of Akhil Vase.
+Unauthorized copying, distribution, or modification is strictly prohibited.
+```
+
+---
+
+<div align="center">
+
+**Documentation that lives where your code lives.**
+
+*CodeLore -- Read the code. Know the system.*
+
+</div>
