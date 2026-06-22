@@ -1,26 +1,13 @@
-# Changelog
+# CodeLore Changelog
 
-## [Unreleased]
+## [Unreleased] -- 2026-06-22
+
 ### Added
-- Multi-language parser: Python and Java support
-- Webhook retry queue with exponential backoff
-- Knowledge graph export to GraphML and JSON-LD
-- Full-text search with MongoDB Atlas Search
-- Module ownership: assign engineers to components
-- Slack bot: query docs with /codelore command
+- TypeScript AST analyzer: extract functions, imports, complexity score
+- Markdown doc generator from AST analysis output
+- Document model with repo/file compound unique index
+- Doc generation API: POST /repos/:id/generate with upsert
+- DocViewer React component with outdated warning banner
 
-### Changed
-- Switched from polling to GitHub webhook push events (10x lower latency)
-- Knowledge graph now uses D3.js force-directed layout
-- Improved circular dependency detection with Tarjan SCC
-
-### Fixed
-- Fixed race condition in concurrent webhook processing
-- Fixed import resolution for aliased paths
-
-## [0.1.0] - 2026-06-01
-### Added
-- JavaScript and TypeScript AST parsing
-- GitHub webhook integration for live doc sync
-- React knowledge graph UI
-- MongoDB document storage
+## [v1.06221253] -- 2026-06-22
+- Run: 20260622125341
