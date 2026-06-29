@@ -1,4 +1,4 @@
-// AST utilities -- 2026-06-29 14:20:18
+// AST utilities -- 2026-06-29 14:21:17
 import * as ts from 'typescript';
 
 export interface FunctionInfo {
