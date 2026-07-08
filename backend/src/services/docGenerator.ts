@@ -1,4 +1,4 @@
-// Documentation generator -- 2026-07-08 10:45:27
+// Documentation generator -- 2026-07-08 10:46:31
 import { FileAnalysis } from '../utils/ast';
 
 export interface GeneratedDoc {
