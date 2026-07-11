@@ -1,4 +1,4 @@
-// Document model -- 2026-07-11 13:54:17
+// Document model -- 2026-07-11 13:55:05
 import mongoose, { Document, Schema } from 'mongoose';
 
 export interface IDocument extends Document {
