@@ -1,4 +1,4 @@
-// Documentation routes -- 2026-07-15 11:33:44
+// Documentation routes -- 2026-07-15 11:35:14
 import { Router } from 'express';
 import { DocModel } from '../models/Document';
 import { analyzeFile } from '../utils/ast';
