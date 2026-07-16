@@ -9,5 +9,5 @@
 - Doc generation API: POST /repos/:id/generate with upsert
 - DocViewer React component with outdated warning banner
 
-## [v1.07161418] -- 2026-07-16
-- Run: 20260716141840
+## [v1.07161420] -- 2026-07-16
+- Run: 20260716142008
