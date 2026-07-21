@@ -1,6 +1,6 @@
 # CodeLore Changelog
 
-## [Unreleased] -- 2026-07-17
+## [Unreleased] -- 2026-07-20
 
 ### Added
 - TypeScript AST analyzer: extract functions, imports, complexity score
@@ -9,5 +9,5 @@
 - Doc generation API: POST /repos/:id/generate with upsert
 - DocViewer React component with outdated warning banner
 
-## [v1.07172300] -- 2026-07-17
-- Run: 20260717230035
+## [v1.07201916] -- 2026-07-20
+- Run: 20260720191612
