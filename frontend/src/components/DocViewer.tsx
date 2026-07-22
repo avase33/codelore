@@ -1,4 +1,4 @@
-// DocViewer component -- 2026-07-21 19:42:58
+// DocViewer component -- 2026-07-21 19:45:34
 import { useState, useEffect } from 'react';
 
 interface Doc { filePath: string; content: string; linesOfCode: number; functionCount: number; outdated: boolean; generatedAt: string; }
